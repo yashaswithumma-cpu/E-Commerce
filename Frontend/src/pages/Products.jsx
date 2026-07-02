@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
 
 function Products() {
   const [products, setProducts] = useState([]);

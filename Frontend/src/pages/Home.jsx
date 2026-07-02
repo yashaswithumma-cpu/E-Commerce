@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
 
 function Home() {
   const [featured, setFeatured] = useState([]);

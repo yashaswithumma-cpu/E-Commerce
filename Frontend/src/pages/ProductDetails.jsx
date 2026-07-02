@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
 import ProductCard from '../components/ProductCard';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
 
 function ProductDetails() {
   const { id } = useParams();

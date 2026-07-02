@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
 
 function Checkout() {
   const navigate = useNavigate();

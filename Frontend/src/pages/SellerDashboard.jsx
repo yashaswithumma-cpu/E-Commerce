@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { Navigate, Link } from 'react-router-dom';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
 
 function SellerDashboard() {
   const { user } = useAuth();
