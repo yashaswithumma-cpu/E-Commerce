@@ -11,11 +11,15 @@ function Navbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const profileRef = useRef();
+  const desktopProfileRef = useRef();
+  const mobileProfileRef = useRef();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (profileRef.current && !profileRef.current.contains(e.target)) {
+      if (
+        (desktopProfileRef.current && !desktopProfileRef.current.contains(e.target)) &&
+        (mobileProfileRef.current && !mobileProfileRef.current.contains(e.target))
+      ) {
         setProfileOpen(false);
       }
     };
@@ -70,7 +74,7 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           {navLinks}
           {user && (
-            <div ref={profileRef} className="relative">
+            <div ref={desktopProfileRef} className="relative">
               <button onClick={() => setProfileOpen(!profileOpen)} className="w-9 h-9 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center cursor-pointer border-2 border-indigo-600 hover:border-indigo-400 transition-colors">
                 {initial}
               </button>
@@ -103,10 +107,30 @@ function Navbar() {
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
           {user && (
-            <div className="md:hidden relative">
+            <div ref={mobileProfileRef} className="md:hidden relative">
               <button onClick={() => setProfileOpen(!profileOpen)} className="w-9 h-9 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center cursor-pointer border-2 border-indigo-600">
                 {initial}
               </button>
+              {profileOpen && (
+                <div className="absolute right-0 top-12 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-2">
+                  <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-700">
+                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">{user.name}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{user.email}</p>
+                  </div>
+                  <Link to="/profile" onClick={() => setProfileOpen(false)} className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 no-underline">My Profile</Link>
+                  <Link to="/orders" onClick={() => setProfileOpen(false)} className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 no-underline">Order History</Link>
+                  <Link to="/wishlist" onClick={() => setProfileOpen(false)} className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 no-underline">Wishlist</Link>
+                  {user.role === 'seller' && (
+                    <Link to="/seller-dashboard" onClick={() => setProfileOpen(false)} className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 no-underline">Dashboard</Link>
+                  )}
+                  {user.role === 'admin' && (
+                    <Link to="/admin" onClick={() => setProfileOpen(false)} className="block px-4 py-2 text-sm text-amber-600 dark:text-amber-400 hover:bg-slate-50 dark:hover:bg-slate-700 no-underline">Admin Panel</Link>
+                  )}
+                  <div className="border-t border-slate-100 dark:border-slate-700 mt-1 pt-1">
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-50 dark:hover:bg-slate-700 bg-none border-none cursor-pointer">Logout</button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden bg-none border-none text-xl cursor-pointer p-2 dark:text-slate-200">

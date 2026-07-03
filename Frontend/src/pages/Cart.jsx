@@ -27,22 +27,26 @@ function Cart() {
       <h2 className="text-2xl font-bold mb-6">Shopping Cart ({cartItems.length} items)</h2>
       <div className="flex flex-col gap-4">
         {cartItems.map((item) => (
-          <div key={item._id} className="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-lg shadow-sm">
-            <img src={item.image} alt={item.name} className="w-20 h-20 object-contain rounded" />
-            <div className="flex-1 min-w-0">
-              <Link to={`/products/${item._id}`} className="font-semibold block mb-1 text-slate-800 dark:text-slate-200 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 truncate">{item.name}</Link>
-              <p className="text-slate-500 dark:text-slate-400 text-sm">₹{item.price.toFixed(2)} each</p>
+          <div key={item._id} className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-lg shadow-sm">
+            <div className="flex items-center gap-4 flex-1 min-w-0">
+              <img src={item.image} alt={item.name} className="w-20 h-20 object-contain rounded shrink-0" />
+              <div className="min-w-0 flex-1">
+                <Link to={`/products/${item._id}`} className="font-semibold block mb-1 text-slate-800 dark:text-slate-200 no-underline hover:text-indigo-600 dark:hover:text-indigo-400 truncate">{item.name}</Link>
+                <p className="text-slate-500 dark:text-slate-400 text-sm">₹{item.price.toFixed(2)} each</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => updateQuantity(item._id, item.quantity - 1)}
-                className="w-8 h-8 border border-slate-200 dark:border-slate-700 rounded bg-none cursor-pointer text-base hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center">-</button>
-              <span className="w-[30px] text-center font-semibold">{item.quantity}</span>
-              <button onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                className="w-8 h-8 border border-slate-200 dark:border-slate-700 rounded bg-none cursor-pointer text-base hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center">+</button>
+            <div className="flex flex-wrap items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+              <div className="flex items-center gap-2">
+                <button onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                  className="w-8 h-8 border border-slate-200 dark:border-slate-700 rounded bg-none cursor-pointer text-base hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center">-</button>
+                <span className="w-[30px] text-center font-semibold">{item.quantity}</span>
+                <button onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                  className="w-8 h-8 border border-slate-200 dark:border-slate-700 rounded bg-none cursor-pointer text-base hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center">+</button>
+              </div>
+              <div className="font-bold text-base w-24 text-right">₹{(item.price * item.quantity).toFixed(2)}</div>
+              <button onClick={() => removeFromCart(item._id)}
+                className="bg-none border border-red-500 dark:border-red-400 text-red-500 dark:text-red-400 rounded-lg px-3 py-1.5 cursor-pointer text-sm hover:bg-red-500 hover:text-white whitespace-nowrap">Remove</button>
             </div>
-            <div className="font-bold text-base w-24 text-right">₹{(item.price * item.quantity).toFixed(2)}</div>
-            <button onClick={() => removeFromCart(item._id)}
-              className="bg-none border border-red-500 dark:border-red-400 text-red-500 dark:text-red-400 rounded-lg px-3 py-1.5 cursor-pointer text-sm hover:bg-red-500 hover:text-white whitespace-nowrap">Remove</button>
           </div>
         ))}
       </div>

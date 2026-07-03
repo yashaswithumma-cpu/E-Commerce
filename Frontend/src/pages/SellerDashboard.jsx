@@ -157,7 +157,7 @@ function SellerDashboard() {
             <textarea placeholder="Description" value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })} required
               className="w-full p-2.5 mb-3 bg-white dark:bg-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-lg text-sm min-h-[80px] resize-y" />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <input type="number" placeholder="Price" value={form.price}
                 onChange={(e) => setForm({ ...form, price: e.target.value })} required
                 className="p-2.5 mb-3 bg-white dark:bg-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-lg text-sm" />
