@@ -19,7 +19,7 @@ exports.getProducts = async (req, res) => {
       ];
     }
 
-    let sortOption = { createdAt: -1 };
+    let sortOption = { name: 1 };
     if (sort === 'price_asc') sortOption = { price: 1 };
     else if (sort === 'price_desc') sortOption = { price: -1 };
     else if (sort === 'rating') sortOption = { ratings: -1 };
