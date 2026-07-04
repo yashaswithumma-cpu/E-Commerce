@@ -2,7 +2,7 @@ const Product = require('../models/Product');
 
 exports.getProducts = async (req, res) => {
   try {
-    const { category, brand, minPrice, maxPrice, search, sort, page = 1, limit = 20 } = req.query;
+    const { category, brand, minPrice, maxPrice, search, sort, page = 1, limit = 20, onSale, minDiscount } = req.query;
     const filter = {};
     if (category) filter.category = category;
     if (brand) filter.brand = brand;
@@ -11,11 +11,15 @@ exports.getProducts = async (req, res) => {
       if (minPrice) filter.price.$gte = Number(minPrice);
       if (maxPrice) filter.price.$lte = Number(maxPrice);
     }
+    if (onSale === 'true') filter.discount = { $gt: 0 };
+    if (minDiscount) filter.discount = { $gte: Number(minDiscount) };
     if (search) {
+      const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       filter.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { brand: { $regex: search, $options: 'i' } },
+        { name: { $regex: escaped, $options: 'i' } },
+        { description: { $regex: escaped, $options: 'i' } },
+        { brand: { $regex: escaped, $options: 'i' } },
+        { category: { $regex: escaped, $options: 'i' } },
       ];
     }
 

@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
+const API = 'http://localhost:5000/api';
 const WishlistContext = createContext();
 
 export const useWishlist = () => useContext(WishlistContext);

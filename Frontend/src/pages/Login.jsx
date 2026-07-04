@@ -21,23 +21,23 @@ function Login() {
 
   return (
     <div className="flex justify-center px-5 py-[60px]">
-      <div className="w-full max-w-[400px] bg-white dark:bg-slate-800 p-8 rounded-lg shadow-sm">
-        <h2 className="mb-5 text-center">Login to ShopEZ</h2>
+      <div className="w-full max-w-[400px] bg-white dark:bg-slate-800 p-6 md:p-8 rounded-xl shadow-sm">
+        <h2 className="text-xl sm:text-2xl font-bold mb-5 text-center text-slate-800 dark:text-white">Login to ShopEZ</h2>
         {error && <p className="text-red-500 text-sm text-center mb-3">{error}</p>}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input type="email" placeholder="Email" value={email}
             onChange={(e) => setEmail(e.target.value)} required
-            className="p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
+            className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
           <input type="password" placeholder="Password" value={password}
             onChange={(e) => setPassword(e.target.value)} required
-            className="p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
+            className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
           <button type="submit"
-            className="p-3 rounded-lg text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 active:scale-[0.98]">
+            className="w-full min-h-[48px] rounded-xl text-sm font-semibold bg-brand-500 text-white hover:bg-brand-600 active:scale-[0.98] transition-all">
             Login
           </button>
         </form>
-        <p className="text-center mt-4 text-sm">
-          Don't have an account? <Link to="/register" className="text-indigo-600 dark:text-indigo-400 hover:underline">Register</Link>
+        <p className="text-center mt-4 text-sm text-slate-500">
+          Don&apos;t have an account? <Link to="/register" className="text-brand-600 dark:text-brand-400 hover:underline">Register</Link>
         </p>
       </div>
     </div>

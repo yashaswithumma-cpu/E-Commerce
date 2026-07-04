@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
-const API = 'https://ecommerce-backend-0ir6.onrender.com/api';
+const API = 'http://localhost:5000/api';
 
 function Checkout() {
   const navigate = useNavigate();
@@ -63,70 +63,71 @@ function Checkout() {
 
   return (
     <div className="max-w-[1200px] mx-auto px-5 py-10">
-      <h2 className="text-2xl font-bold mb-6">Checkout</h2>
-      <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-10">
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm space-y-4">
-          <h3 className="font-semibold text-lg">Shipping Address</h3>
+      <h2 className="text-xl sm:text-2xl font-bold mb-6 text-slate-800 dark:text-white">Checkout</h2>
+      <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm space-y-4">
+          <h3 className="font-semibold text-base sm:text-lg text-slate-800 dark:text-white">Shipping Address</h3>
           <input type="text" placeholder="Street Address" value={address.address}
             onChange={(e) => setAddress({ ...address, address: e.target.value })} required
-            className="w-full p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
-          <div className="grid grid-cols-2 gap-3">
+            className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input type="text" placeholder="City" value={address.city}
               onChange={(e) => setAddress({ ...address, city: e.target.value })} required
-              className="w-full p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
+              className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
             <input type="text" placeholder="Postal Code" value={address.postalCode}
               onChange={(e) => setAddress({ ...address, postalCode: e.target.value })} required
-              className="w-full p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
+              className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
           </div>
           <input type="text" placeholder="Country" value={address.country}
             onChange={(e) => setAddress({ ...address, country: e.target.value })} required
-            className="w-full p-3 border border-slate-200 dark:border-slate-700 rounded-lg text-sm bg-white dark:bg-slate-800 dark:text-slate-100" />
+            className="w-full p-3 min-h-[48px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
 
-          <h3 className="font-semibold text-lg pt-4">Payment Method</h3>
+          <h3 className="font-semibold text-base sm:text-lg text-slate-800 dark:text-white pt-4">Payment Method</h3>
           <div className="space-y-2">
-            <label className="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700">
+            <label className="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
               <input type="radio" name="payment" value="COD" checked={paymentMethod === 'COD'}
-                onChange={(e) => setPaymentMethod(e.target.value)} />
-              <span className="text-sm font-medium">Cash on Delivery (COD)</span>
+                onChange={(e) => setPaymentMethod(e.target.value)} className="accent-brand-500" />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Cash on Delivery (COD)</span>
             </label>
-            <label className="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700">
+            <label className="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
               <input type="radio" name="payment" value="Stripe" checked={paymentMethod === 'Stripe'}
-                onChange={(e) => setPaymentMethod(e.target.value)} />
-              <span className="text-sm font-medium">Credit/Debit Card (Stripe)</span>
+                onChange={(e) => setPaymentMethod(e.target.value)} className="accent-brand-500" />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Credit/Debit Card (Stripe)</span>
             </label>
           </div>
 
           <button type="submit" disabled={loading}
-            className="w-full p-3 rounded-lg text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-60 active:scale-[0.98]">
+            className="w-full min-h-[48px] rounded-xl text-sm font-semibold bg-brand-500 text-white hover:bg-brand-600 disabled:opacity-60 active:scale-[0.98] transition-all">
             {loading ? 'Processing...' : `Place Order (₹${finalTotal.toFixed(2)})`}
           </button>
         </form>
 
         <div className="space-y-4">
-          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
-            <h3 className="font-semibold mb-4">Order Summary</h3>
+          <div className="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm">
+            <h3 className="font-semibold mb-4 text-slate-800 dark:text-white">Order Summary</h3>
             {cartItems.map((item) => (
-              <div key={item._id} className="flex justify-between mb-2 text-sm">
-                <span className="truncate mr-2">{item.name} x{item.quantity}</span>
-                <span className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
+              <div key={item._id} className="flex items-center gap-3 mb-3 text-sm">
+                <img src={item.image} alt={item.name} className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg shrink-0 hidden sm:block" />
+                <span className="truncate flex-1 text-slate-600 dark:text-slate-400">{item.name} x{item.quantity}</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200 shrink-0">₹{(item.price * item.quantity).toFixed(2)}</span>
               </div>
             ))}
-            <hr className="my-3" />
-            <div className="flex justify-between text-sm"><span>Subtotal</span><span>₹{cartTotal.toFixed(2)}</span></div>
+            <hr className="my-3 border-slate-200 dark:border-slate-700" />
+            <div className="flex justify-between text-sm text-slate-600 dark:text-slate-400"><span>Subtotal</span><span>₹{cartTotal.toFixed(2)}</span></div>
             {appliedCoupon && <div className="flex justify-between text-sm text-green-600 dark:text-green-400"><span>Discount ({appliedCoupon.coupon})</span><span>-₹{appliedCoupon.discount.toFixed(2)}</span></div>}
-            <div className="flex justify-between font-bold text-lg border-t pt-3 mt-3">
+            <div className="flex justify-between font-bold text-base sm:text-lg border-t border-slate-200 dark:border-slate-700 pt-3 mt-3 text-slate-800 dark:text-white">
               <span>Total</span><span>₹{finalTotal.toFixed(2)}</span>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
-            <h3 className="font-semibold mb-3">Coupon Code</h3>
-            <div className="flex gap-2">
+          <div className="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm">
+            <h3 className="font-semibold mb-3 text-slate-800 dark:text-white">Coupon Code</h3>
+            <div className="flex flex-col sm:flex-row gap-2">
               <input type="text" placeholder="Enter coupon code" value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                className="flex-1 p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm uppercase bg-white dark:bg-slate-800 dark:text-slate-100" />
+                className="flex-1 p-2.5 min-h-[44px] border border-slate-200 dark:border-slate-700 rounded-xl text-sm uppercase bg-white dark:bg-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition-all" />
               <button type="button" onClick={handleApplyCoupon}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">Apply</button>
+                className="w-full sm:w-auto min-h-[44px] px-4 py-2 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600 transition-all active:scale-[0.98]">Apply</button>
             </div>
             {couponMsg && <p className={`text-sm mt-2 ${appliedCoupon ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>{couponMsg}</p>}
             {appliedCoupon && <button onClick={() => { setAppliedCoupon(null); setCouponMsg(''); setCouponCode(''); }}

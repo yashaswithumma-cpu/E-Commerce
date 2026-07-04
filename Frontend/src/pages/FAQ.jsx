@@ -16,11 +16,11 @@ function FAQ() {
 
   return (
     <div className="max-w-4xl mx-auto px-5 py-10">
-      <h1 className="text-3xl font-bold mb-6">Frequently Asked Questions</h1>
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm divide-y">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-slate-800 dark:text-white">Frequently Asked Questions</h1>
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm divide-y divide-slate-200 dark:divide-slate-700">
         {faqs.map((faq, i) => (
-          <details key={i} className="p-5 group">
-            <summary className="font-medium cursor-pointer text-slate-800 dark:text-slate-200 group-open:text-indigo-600 dark:group-open:text-indigo-400">{faq.q}</summary>
+          <details key={i} className="p-4 md:p-5 group">
+            <summary className="font-medium cursor-pointer text-slate-800 dark:text-slate-200 group-open:text-brand-600 dark:group-open:text-brand-400 text-sm sm:text-base">{faq.q}</summary>
             <p className="mt-3 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{faq.a}</p>
           </details>
         ))}

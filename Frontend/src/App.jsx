@@ -27,13 +27,14 @@ import AdminCategories from './pages/AdminCategories';
 import AdminCoupons from './pages/AdminCoupons';
 import AdminOrders from './pages/AdminOrders';
 import AdminContact from './pages/AdminContact';
+import VisualSearch from './pages/VisualSearch';
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
-          <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+          <div className="min-h-screen flex flex-col">
             <Navbar />
             <main className="flex-1">
               <Routes>
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/visual-search" element={<VisualSearch />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
                 <Route path="/admin/products" element={<AdminProducts />} />
